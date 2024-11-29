@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="/Espaco-Dantas/logologin.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="img/logoblack.png" alt="Logo da Empresa">
+    </div>
+    <div class="login-container">
+        <form class="login-form" action="/processar_login.php" method="POST">
+            <h2>Login</h2>
+            
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
+            
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+            
+            <button type="submit">Entrar</button>
+        </form>
+        <p class="login-link">
+            Não tem uma conta? 
+            <a href="/Espaco-Dantas/cadastro.html">Cadastre-se aqui</a>
+        </p>
+    </div>
+    <script>
+        document.querySelector('.login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('/Espaco-Dantas/processar_login.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Login realizado com sucesso!');
+                    window.location.href = '/Espaco-Dantas/reserva.html';
+                } else {
+                    alert(data.message || 'Erro ao fazer login');
+                }
+            } catch (error) {
+                alert('Erro ao processar login');
+            }
+        });
+    </script>
+</body>
+</html>

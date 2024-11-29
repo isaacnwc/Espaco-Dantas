@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço Dantas</title>
+    <link rel="stylesheet" href="/Espaco-Dantas/style-info.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logoblack.png" alt="Logo do Espaço de Lazer">
+        </div>
+    </header>
+
+    <section class="images">
+        <div class="image-grid">
+            <img src="img/piscina.jpg" alt="Piscina">
+            <img src="img/churrasqueira.jpg" alt="Churrasqueira">
+            <img src="img/salão.jpg" alt="Salão de Festas">
+        </div>
+    </section>
+
+    <section class="info">
+        <h1>O QUE OFERECEMOS:</h1>
+    <div class="item">
+        <img src="img/piscinas.png" alt="piscina" class="icon">
+        <span>Piscinas privativas</span>
+    </div>
+    <div class="item">
+        <img src="img/churrasqueira.png" alt="churrasqueira" class="icon">
+        <span>Churrasqueira completa</span>
+    </div>
+    <div class="item">
+        <img src="img/pessoas.png" alt="pessoas" class="icon">
+        <span>Espaço com capacidade para 100 pessoas</span>
+    </div>
+    <div class="item">
+        <img src="img/garagem.png" alt="estacionamento" class="icon">
+        <span>Estacionamento gratuito</span>
+    </div>
+    <div class="item">
+        <img src="img/wifi.png" alt="wifi" class="icon">
+        <span>Wi-Fi disponível em todo o espaço</span>
+    </div>
+
+        
+
+        
+    
+        <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61335.652399726874!2d-47.885083550000004!3d-16.092541199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93598fb253701997%3A0xfc2fa3db7d70d5de!2sCidade%20Ocidental%2C%20GO!5e0!3m2!1spt-BR!2sbr!4v1727408401238!5m2!1spt-BR!2sbr"
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+
+        </iframe>
+        </div>
+        <div class="Reservas">
+            <a href="login.html" id="btnReservar" class="Reservas">RESERVAR</a>
+        </div>
+        
+        
+    </section>
+
+    <footer>
+        
+        <p>&copy; 2024 Espaço Dantas - Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.getElementById("btnReservar").addEventListener("click", function (event) {
+            event.preventDefault();
+            
+            
+            fetch('verificar_login.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.logado) {
+                        alert("Você precisa fazer login antes de continuar!");
+                        window.location.href = "login.html"; // Ajustado para o caminho correto
+                    } else {
+                        window.location.href = "reserva.html"; // Ajustado para o caminho correto
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert("Erro ao verificar login. Tente novamente.");
+                });
+        });
+    </script>
+</body>
+</html>
+            
+

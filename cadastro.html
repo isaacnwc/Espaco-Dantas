@@ -1,0 +1,71 @@
+cadastro:
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Cadastro</title>
+    <link rel="stylesheet" href="/Espaco-Dantas/logologin.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="img/logoblack.png" alt="Logo da Empresa">
+    </div>
+    <div class="register-container">
+        <form class="register-form" action="/processar_cadastro.php" method="POST">
+
+            <h2>Cadastro</h2>
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
+            
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+            <label for="confirm-password">Confirme a Senha:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirme sua senha" required>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+        
+        <p style="color:white" >Não tem uma conta? <a style="color:#dbc33c" href="/Espaco-Dantas/login.html">Faça login aqui</a></p>
+    </div>
+    <script>
+        document.querySelector('.register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const senha = document.getElementById('password').value;
+            const confirmarSenha = document.getElementById('confirm-password').value;
+
+            if (senha !== confirmarSenha) {
+                alert('As senhas não coincidem');
+                return;
+            }
+
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('/Espaco-Dantas/processar_cadastro.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.href = '/Espaco-Dantas/reserva.html';
+                } else {
+                    alert(data.message || 'Erro ao cadastrar');
+                }
+            } catch (error) {
+                alert('Erro ao processar cadastro');
+            }
+        });
+    </script>
+
+
+</body>
+</html>
